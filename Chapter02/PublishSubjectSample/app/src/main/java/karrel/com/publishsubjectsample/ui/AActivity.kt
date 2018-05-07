@@ -8,6 +8,10 @@ import karrel.com.publishsubjectsample.rx.AutoClearOnDestroy
 import karrel.com.publishsubjectsample.rx.EventBus
 import kotlinx.android.synthetic.main.activity_a.*
 
+/**
+ *
+ * 테스트 클래스 A
+ */
 class AActivity : AppCompatActivity() {
 
     private val disposables = AutoClearOnDestroy(this)

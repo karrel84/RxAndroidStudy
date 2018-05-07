@@ -11,6 +11,10 @@ import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.intentFor
 import java.util.concurrent.TimeUnit
 
+/**
+ * PublishSubject를 이용한 이벤트버스를 테스트하기위한 클래스이다
+ * 액티비티가 실행될때 이벤트버스로 보낼 이벤트를 발생한다
+ */
 class MainActivity : AppCompatActivity() {
 
     private val disposablesOnDestory = AutoClearOnDestroy(this)

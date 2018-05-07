@@ -7,6 +7,9 @@ import io.reactivex.disposables.CompositeDisposable
 
 /**
  * Created by Rell on 2018. 5. 7..
+ *
+ * 라이프사이클에 onDestory가 호출되면 구독을 해제한다
+ *
  */
 class AutoClearOnDestroy(lifecycleOwner: AppCompatActivity) : AutoClearedDisposable(lifecycleOwner) {
 

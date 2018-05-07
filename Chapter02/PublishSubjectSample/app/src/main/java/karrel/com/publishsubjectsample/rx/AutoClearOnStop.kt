@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity
 
 /**
  * Created by Rell on 2018. 5. 7..
+ *
+ * 라이프사이클 onStop이 호출되면 구독을 해제한다
  */
 class AutoClearOnStop(lifecycleOwner: AppCompatActivity) : AutoClearedDisposable(lifecycleOwner) {
 

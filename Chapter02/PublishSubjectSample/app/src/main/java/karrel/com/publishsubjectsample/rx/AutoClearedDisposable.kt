@@ -8,6 +8,9 @@ import io.reactivex.disposables.Disposable
 
 /**
  * Created by Rell on 2018. 5. 7..
+ *
+ * 라이프사이클의 상태변화에 따라 구독중인 Observable을 해제하기 위한 클래스
+ *
  */
 open class AutoClearedDisposable(
         private val lifecycleOwner: AppCompatActivity,
