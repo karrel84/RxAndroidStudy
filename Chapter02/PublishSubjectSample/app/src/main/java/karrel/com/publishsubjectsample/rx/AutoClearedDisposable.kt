@@ -9,7 +9,7 @@ import io.reactivex.disposables.Disposable
 /**
  * Created by Rell on 2018. 5. 7..
  *
- * 라이프사이클의 상태변화에 따라 구독중인 Observable을 해제하기 위한 클래스
+ * 라이프사이클의 상태변화에 따라 구독중인 Observable 을 해제하기 위한 클래스
  *
  */
 open class AutoClearedDisposable(
@@ -18,7 +18,7 @@ open class AutoClearedDisposable(
     : LifecycleObserver {
 
     fun add(disposable: Disposable) {
-        // false 이면 EllegalStateException을 던진다
+        // false 이면 illegalStateException 던진다
         check(lifecycleOwner.lifecycle.currentState.isAtLeast(Lifecycle.State.INITIALIZED))
         compositeDisposable.add(disposable)
     }
@@ -27,5 +27,6 @@ open class AutoClearedDisposable(
     open fun detachSelf() {
         compositeDisposable.clear()
         lifecycleOwner.lifecycle.removeObserver(this)
+
     }
 }

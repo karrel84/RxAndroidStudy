@@ -21,10 +21,10 @@ class BActivity : AppCompatActivity() {
         setContentView(R.layout.activity_b)
 
         lifecycle += disposables
-        recieveEvent()
+        receiveEvent()
     }
 
-    private fun recieveEvent() {
+    private fun receiveEvent() {
         disposables += EventBus.observable().subscribe {
             log.append("${it} ")
         }

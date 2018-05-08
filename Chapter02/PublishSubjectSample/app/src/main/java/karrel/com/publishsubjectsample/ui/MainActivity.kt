@@ -17,18 +17,18 @@ import java.util.concurrent.TimeUnit
  */
 class MainActivity : AppCompatActivity() {
 
-    private val disposablesOnDestory = AutoClearOnDestroy(this)
+    private val disposablesOnDestroy = AutoClearOnDestroy(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        lifecycle += disposablesOnDestory // add lifecycle
+        lifecycle += disposablesOnDestroy // add lifecycle
 
         setupEvent() // button event
 
         publishEvent()
-        recieveEvent()
+        receiveEvent()
     }
 
     private fun setupEvent() {
@@ -37,18 +37,18 @@ class MainActivity : AppCompatActivity() {
         bActivity.setOnClickListener { startActivity(intentFor<BActivity>()) }
     }
 
-    private fun recieveEvent() {
-        disposablesOnDestory += EventBus.observable().subscribe {
+    private fun receiveEvent() {
+        disposablesOnDestroy += EventBus.observable().subscribe {
             log.append("${it} ")
         }
     }
 
     private fun publishEvent() {
-        disposablesOnDestory += timmer.subscribe {
+        disposablesOnDestroy += timer.subscribe {
             println("publish event ${it}")
             EventBus.publish(it)
         }
     }
 
-    private val timmer: Observable<Long> = Observable.interval(1, TimeUnit.SECONDS)
+    private val timer: Observable<Long> = Observable.interval(1, TimeUnit.SECONDS)
 }
