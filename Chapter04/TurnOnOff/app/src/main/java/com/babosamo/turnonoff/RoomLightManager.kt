@@ -2,6 +2,9 @@ package com.babosamo.turnonoff
 
 import android.util.Log
 import android.widget.Button
+import io.reactivex.Observable
+import io.reactivex.functions.BiFunction
+import java.util.concurrent.TimeUnit
 
 object RoomLightManager {
 
@@ -16,5 +19,10 @@ object RoomLightManager {
             Log.i(RoomLightManager.toString(), "${room.text} == $isOn")
             callback(isOn)
         }).start()
+    }
+
+
+    fun isTurnOn (room:Button): Observable<Pair<Button,Boolean>> {
+        return Observable.zip(Observable.just(Pair(room, ((Math.random() * 3).toInt() > 0 ))), Observable.interval(2000, TimeUnit.MILLISECONDS), BiFunction{v:Pair<Button,Boolean>, a:Long -> v})
     }
 }
