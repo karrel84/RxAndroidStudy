@@ -1,14 +1,16 @@
 package com.karrel.zipsample
 
 import io.reactivex.Observable
-import io.reactivex.schedulers.Timed
 import org.junit.Assert
 import org.junit.Test
 
 /**
- * zip 함수의 예제로
+ * zip()
  * 3개의 url을 호출하여 정보를 조합한다고 가정한다.
  * 이경우 zip 을 이용하면 어떤장점이 있는지 확인해본다.
+ *
+ * timeInterval()
+ * TestCase에서의 특정 시간을 초과하면 테스트 실패로 간주하기 위해 사용
  */
 class ExampleUnitTest {
     // 3가지 문제
