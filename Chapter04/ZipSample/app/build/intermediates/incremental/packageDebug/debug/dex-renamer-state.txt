@@ -1,0 +1,4 @@
+#Wed May 30 22:12:07 KST 2018
+base.0=/Users/kimmihye/RxAndroidStudy/Chapter04/ZipSample/app/build/intermediates/transforms/dexMerger/debug/0
+renamed.0=classes.dex
+file.0=/Users/kimmihye/RxAndroidStudy/Chapter04/ZipSample/app/build/intermediates/transforms/dexMerger/debug/0/classes.dex
