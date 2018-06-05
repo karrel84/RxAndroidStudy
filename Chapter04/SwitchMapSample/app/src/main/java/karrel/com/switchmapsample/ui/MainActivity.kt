@@ -4,10 +4,15 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.support.v7.widget.StaggeredGridLayoutManager
+import android.util.Log
+import com.bumptech.glide.Glide
 import com.jakewharton.rxbinding2.widget.RxTextView
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import karrel.com.switchmapsample.R
+import karrel.com.switchmapsample.etc.CommonUtils
 import karrel.com.switchmapsample.etc.getImageUrlsFromKeyword
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.concurrent.TimeUnit
@@ -17,7 +22,7 @@ class MainActivity : AppCompatActivity() {
     private val eventDelayTime = 300L
 
     private lateinit var imageAdapter: ImageAdapter
-    private val gridLayoutManager = GridLayoutManager(this@MainActivity, 2)
+    private val gridLayoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,10 +36,13 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupSearchEvent() {
         inputChangeEvent()
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .doOnNext { println("start search!! : $it") }
                 .doOnNext { imageAdapter.clearImages() }
+                .subscribeOn(Schedulers.computation())
                 .map { keyword -> keyword.toString() }
                 .flatMap(::getImageUrlsFromKeyword) //구글 이미지 스크랩퍼에서 이미지 url을 가져온다
-                .take(100)
+                .doOnNext { println("load setupSearchEvent !!!") }
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ imageAdapter.addImageUrl(it) }) {
                     it.printStackTrace()

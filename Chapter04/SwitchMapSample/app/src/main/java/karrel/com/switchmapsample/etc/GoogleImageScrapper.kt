@@ -21,6 +21,7 @@ fun getImageUrlsFromKeyword(keyword: String): Observable<String>? {
     return Observable.just(url)
             .subscribeOn(Schedulers.io()) // io 스케쥴러
             .map { Jsoup.connect(it).get() } // get Document from url
+            .subscribeOn(Schedulers.computation()) // io 스케쥴러
             .map { it.getElementsByClass("rg_meta notranslate") } // get Elements from class name
             .flatMap { Observable.fromIterable(it.asIterable()) } // flat iterable
             .map { it.html() } // Element to html

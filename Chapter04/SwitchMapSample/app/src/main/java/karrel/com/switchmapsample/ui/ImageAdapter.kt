@@ -5,6 +5,8 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
+import io.reactivex.Observable
+import io.reactivex.android.schedulers.AndroidSchedulers
 import karrel.com.switchmapsample.R
 import kotlinx.android.synthetic.main.item_image.view.*
 
@@ -20,18 +22,25 @@ class ImageAdapter(private val context: Context) : RecyclerView.Adapter<ImageAda
 
     override fun onBindViewHolder(holder: ImageHolder, position: Int) {
         items[position].let { url ->
-//            println("url : $url")
+            //            println("url : $url")
             Glide.with(context).load(url).into(holder.itemView.image)
         }
     }
 
     fun clearImages() {
-        items.clear()
+//        notifyItemRangeRemoved(0, items.size)
+        Observable.just("")
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe {
+                    items.clear()
+                    notifyDataSetChanged()
+                }
     }
 
     fun addImageUrl(url: String) {
         items.add(url)
-        notifyDataSetChanged()
+        println("${items.size}. addImageUrl url : $url")
+        if (items.size > 0) notifyItemInserted(items.size - 1)
     }
 
     class ImageHolder(parent: ViewGroup) : RecyclerView.ViewHolder(
